@@ -1,15 +1,14 @@
+<script setup lang="ts"></script>
+
 <template>
-  <h1>Site inicial</h1>
+  <Header />
 </template>
 
-<script lang="ts">
+<script>
+import Header from "./components/Header.vue";
 export default {
-  name: "App",
+  components: {
+    Header,
+  },
 };
 </script>
-
-<style>
-body {
-  color: #fff;
-}
-</style>
