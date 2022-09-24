@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from "vue-router";
     <div class="wrapper">
       <nav>
         <RouterLink to="/">
-          <img src="" id="logo" />
+          <img :src="logo" :alt="alt" id="logo" />
         </RouterLink>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/pedidos">Pedidos</RouterLink>
@@ -16,3 +16,9 @@ import { RouterLink, RouterView } from "vue-router";
   </header>
   <RouterView />
 </template>
+
+<script lang="ts">
+export default {
+  props: ["logo", "alt"],
+};
+</script>
