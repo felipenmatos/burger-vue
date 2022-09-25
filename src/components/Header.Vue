@@ -5,10 +5,10 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
+      <RouterLink to="/">
+        <img :src="logo" :alt="alt" id="logo" />
+      </RouterLink>
       <nav>
-        <RouterLink to="/">
-          <img :src="logo" :alt="alt" id="logo" />
-        </RouterLink>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/pedidos">Pedidos</RouterLink>
       </nav>
@@ -22,3 +22,22 @@ export default {
   props: ["logo", "alt"],
 };
 </script>
+
+<style>
+.wrapper {
+  max-width: 100%;
+  width: 100vw;
+  background-color: #222;
+  border-bottom: 4px solid #111;
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  background: red;
+}
+</style>

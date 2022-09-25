@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <body class="body">
     <Header :logo="logo_src" :alt="app_name" />
     <Footer />
-  </div>
+  </body>
 </template>
 
 <script lang="ts">
@@ -21,3 +21,15 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+</style>
