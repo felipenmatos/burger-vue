@@ -24,12 +24,25 @@ export default {
 
 <style>
 body {
-  max-height: 100vh;
-  padding: 0;
-  margin: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.body {
+  background-color: #ffffff;
+}
+
+.main-container {
+  margin: 50px;
+  min-height: 250px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: #222;
 }
 </style>
