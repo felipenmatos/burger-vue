@@ -32,6 +32,7 @@ body {
 
 .body {
   background-color: #ffffff;
+  color: #222;
 }
 
 .main-container {
