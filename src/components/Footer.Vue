@@ -8,9 +8,9 @@
 
 <style scoped>
 #footer {
-  height: 100px;
+  height: 200px;
   bottom: 0;
-  position: absolute;
+  position: relative;
   background-color: #222;
   border-top: 4px solid #111;
   color: #fcba03;
