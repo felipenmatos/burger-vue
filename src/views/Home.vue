@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 .main-container {
-  height: 600px;
+  height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: center;

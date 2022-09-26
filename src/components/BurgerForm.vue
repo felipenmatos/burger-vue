@@ -1,60 +1,64 @@
 <template>
   <div>
-    <form id="burger-form" @submit="createBurger">
-      <div class="input-container">
-        <label for="nome">Nome do cliente:</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          v-model="nome"
-          placeholder="Digite o seu nome"
-        />
-      </div>
-      <div class="input-container">
-        <label for="pao">Escolha o pão:</label>
-        <select name="pao" id="pao" v-model="pao">
-          <option value="">Selecione o seu pão</option>
-          <option v-for="pao in paes" :key="pao.id" :value="pao.tipo">
-            {{ pao.tipo }}
-          </option>
-        </select>
-      </div>
-      <div class="input-container">
-        <label for="carne">Escolha a carne do seu Burger:</label>
-        <select name="carne" id="carne" v-model="carne">
-          <option value="">Selecione a carne</option>
-          <option v-for="carne in carnes" :key="carne.id" :value="carne.tipo">
-            {{ carne.tipo }}
-          </option>
-        </select>
-      </div>
-      <div class="input-container" id="opcionais-container">
-        <label id="opcionais-title" for="opcionais"
-          >Selecione os opcionais:</label
-        >
-        <div
-          class="checkbox-container"
-          v-for="opcional in opcionais"
-          :key="opcional.id"
-        >
+    <Message :msg="msg" v-show="msg" />
+    <div>
+      <form id="burger-form" @submit="createBurger">
+        <div class="input-container">
+          <label for="nome">Nome do cliente:</label>
           <input
-            type="checkbox"
-            name="opcionais"
-            v-model="opcionais"
-            :value="opcional.tipo"
+            type="text"
+            id="nome"
+            name="nome"
+            v-model="nome"
+            placeholder="Digite o seu nome"
           />
-          <span>{{ opcional.tipo }}</span>
         </div>
         <div class="input-container">
-          <input type="submit" class="submit-btn" value="Criar meu Burger" />
+          <label for="pao">Escolha o pão:</label>
+          <select name="pao" id="pao" v-model="pao">
+            <option value="">Selecione o seu pão</option>
+            <option v-for="pao in paes" :key="pao.id" :value="pao.tipo">
+              {{ pao.tipo }}
+            </option>
+          </select>
         </div>
-      </div>
-    </form>
+        <div class="input-container">
+          <label for="carne">Escolha a carne do seu Burger:</label>
+          <select name="carne" id="carne" v-model="carne">
+            <option value="">Selecione a carne</option>
+            <option v-for="carne in carnes" :key="carne.id" :value="carne.tipo">
+              {{ carne.tipo }}
+            </option>
+          </select>
+        </div>
+        <div class="input-container" id="opcionais-container">
+          <label id="opcionais-title" for="opcionais"
+            >Selecione os opcionais:</label
+          >
+          <div
+            class="checkbox-container"
+            v-for="opcional in opcionaisdata"
+            :key="opcional.id"
+          >
+            <input
+              type="checkbox"
+              name="opcionais"
+              v-model="opcionais"
+              :value="opcional.tipo"
+            />
+            <span>{{ opcional.tipo }}</span>
+          </div>
+          <div class="input-container">
+            <input type="submit" class="submit-btn" value="Criar meu Burger" />
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import Message from "./Message.vue";
 export default {
   name: "BurgerForm",
   data() {
@@ -70,6 +74,9 @@ export default {
       msg: null,
     };
   },
+  components: {
+    Message,
+  },
   methods: {
     async getIngredientes() {
       const req = await fetch("http://localhost:3000/ingredientes");
@@ -78,7 +85,7 @@ export default {
 
       this.paes = data.paes;
       this.carnes = data.carnes;
-      this.opcionais = data.opcionais;
+      this.opcionaisdata = data.opcionais;
     },
     async createBurger(e) {
       e.preventDefault();
@@ -102,7 +109,15 @@ export default {
 
       const res = await req.json();
 
-      console.log(res);
+      // colocar uma msg no sistema
+      this.msg = `Pedido N° ${res.id} realizado com sucesso.`;
+      // limpar msg
+      setTimeout(() => (this.msg = ""), 3000);
+      // limpar dados do input
+      this.nome = "";
+      this.carne = "";
+      this.pao = "";
+      this.opcionais = [];
     },
   },
   mounted() {
