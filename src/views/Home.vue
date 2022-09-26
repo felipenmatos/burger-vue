@@ -19,3 +19,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.main-container {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
