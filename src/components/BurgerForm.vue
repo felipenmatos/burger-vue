@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form id="burger-form">
+    <form id="burger-form" @submit="createBurger">
       <div class="input-container">
         <label for="nome">Nome do cliente:</label>
         <input
@@ -15,7 +15,7 @@
         <label for="pao">Escolha o pão:</label>
         <select name="pao" id="pao" v-model="pao">
           <option value="">Selecione o seu pão</option>
-          <option v-for="pao in paes" key="pao.id" value="pao.tipo">
+          <option v-for="pao in paes" :key="pao.id" :value="pao.tipo">
             {{ pao.tipo }}
           </option>
         </select>
@@ -79,6 +79,30 @@ export default {
       this.paes = data.paes;
       this.carnes = data.carnes;
       this.opcionais = data.opcionais;
+    },
+    async createBurger(e) {
+      e.preventDefault();
+
+      const data = {
+        nome: this.nome,
+        carne: this.carne,
+        pao: this.pao,
+        opcionais: Array.from(this.opcionais),
+        status: "Solicitado",
+      };
+
+      //transform date as json text
+      const dataJson = JSON.stringify(data);
+
+      const req = await fetch("http://localhost:3000/burgers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: dataJson,
+      });
+
+      const res = await req.json();
+
+      console.log(res);
     },
   },
   mounted() {
